@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="page.css"> 
+     <title>Animation javascript</title>
+</head>
+<body>
+    
+    <div class="header">
+        <h1>Tout ce passe au milieu de l'écran. Déplacer votre souris au centre de l'écran et peut-être que des choses vont s'allumer.</h1>
+      </div>
+
+
+<div class="a" id="a"></div>
+
+<style>
+* {
+    box-sizing : border-box;
+}
+
+body {
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    overflow: hidden;
+    margin: 0;
+}
+
+.a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 400px;
+}
+
+.square {
+    background: color #1d1d1d;
+    box-shadow: 0 0 2px #000;
+    height: 16px;
+    width: 16px;
+    margin: 2px;
+    transition: 2s ease;
+}
+
+.square:hover {
+    transition-duration: 0s;
+}
+
+.header {
+  color: aliceblue;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgb(0, 0, 0);
+  z-index: 1; 
+}
+
+</style>
+<script>
+
+const a = document.getElementById('a')
+const colors = ['#ee2f2f', '#DDEE2F' , '#89EE2F' , '#2feeb7', '#2fd7ee' , '#2f86ee', '#322fee' , '#892fee' , '#c52fee' , '#ee2fce' , '#ee2f63' , '#ee2f2f']
+const SQUARES = 500
+
+for(let i = 0; i < SQUARES; i++) {
+    const square = document.createElement('div')
+    square.classList.add('square')
+    square.addEventListener('mouseover', () => setColor (square))
+    square.addEventListener('mouseout', () => removecolor(square))
+    a.appendChild(square)
+
+}
+
+function setColor(element) {
+    const color = getRamdomColor()
+    element.style.background = color
+    element.style.boxshadow = `0 0 2px ${color}, 0 0 10px ${color}`
+}
+
+function removecolor(element) {
+    element.style.background = '#1d1d1d'
+    element.style.boxshadow = '0 0 2px #000'
+
+}
+
+function getRamdomColor() {
+    return colors[Math.floor(Math.random() * colors.length)]
+}
+</script>
+
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
